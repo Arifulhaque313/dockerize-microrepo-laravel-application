@@ -43,20 +43,20 @@ DB_PASSWORD=laravel
 docker compose up -d
 
 # Install PHP dependencies
-docker compose exec laravel-app composer install
+docker compose exec -it app composer install
 
 # Generate application key
-docker compose exec laravel-app php artisan key:generate
+docker compose exec -it app php artisan key:generate
 ```
 
 ### 4. Database Setup
 
 ```bash
 # Run database migrations
-docker compose exec laravel-app php artisan migrate
+docker compose exec -it app php artisan migrate
 
 # (Optional) Seed the database
-docker compose exec laravel-app php artisan db:seed
+docker compose exec -it app php artisan db:seed
 ```
 
 ## Docker Container Structure
@@ -88,7 +88,7 @@ docker compose down
 docker compose logs -f
 
 # Access PHP container shell
-docker compose exec laravel-app bash
+docker compose exec app bash
 
 # List running containers
 docker compose ps
@@ -98,16 +98,16 @@ docker compose ps
 
 ```bash
 # Clear application cache
-docker compose exec laravel-app php artisan cache:clear
+docker compose exec app php artisan cache:clear
 
 # Run migrations
-docker compose exec laravel-app php artisan migrate
+docker compose exec app php artisan migrate
 
 # Create a new controller
-docker compose exec laravel-app php artisan make:controller ControllerName
+docker compose exec app php artisan make:controller ControllerName
 
 # Run tests
-docker compose exec laravel-app php artisan test
+docker compose exec app php artisan test
 ```
 
 ## Development Workflow
@@ -116,11 +116,11 @@ docker compose exec laravel-app php artisan test
 2. The changes will be automatically reflected due to volume mapping
 3. If you modify dependencies:
    ```bash
-   docker compose exec laravel-app composer update
+   docker compose exec app composer update
    ```
 4. If you modify the database:
    ```bash
-   docker compose exec laravel-app php artisan migrate
+   docker compose exec app php artisan migrate
    ```
 
 ## Troubleshooting
@@ -130,8 +130,8 @@ docker compose exec laravel-app php artisan test
 1. **Permission Issues**
    ```bash
    # Fix storage permissions
-   docker compose exec laravel-app chown -R www-data:www-data storage
-   docker compose exec laravel-app chmod -R 775 storage
+   docker compose exec app chown -R www-data:www-data storage
+   docker compose exec app chmod -R 775 storage
    ```
 
 2. **Container Won't Start**
